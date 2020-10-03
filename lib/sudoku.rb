@@ -13,19 +13,16 @@ module Sudoku
       grid << line.chomp.split(' ').map(&:to_i)
     end
 
-    solution = []
+    sudoku = if algorithm == SIMPLE
+               Sudoku::Simple.new(grid)
+             elsif algorithm == OPTIMIZED
+               Sudoku::Optimized.new(grid)
+             else
+               raise 'Invalid algorithm option'
+             end
 
-    if algorithm == SIMPLE
-      sudoku = Sudoku::Simple.new(grid)
-      solved = sudoku.solve(0, 0)
-      solution = sudoku.simple_grid if solved
-    elsif algorithm == OPTIMIZED
-      sudoku = Sudoku::Optimized.new(grid)
-      solved = sudoku.solve(0, 0)
-      solution = sudoku.simple_grid if solved
-    else
-      raise 'Invalid algorithm option'
-    end
+    solved = sudoku.solve(0, 0)
+    solution = sudoku.simple_grid if solved
 
     if !solved
       raise 'Can not solve this sudoku'
