@@ -32,7 +32,7 @@ module Sudoku
           next if @grid[line][column] != 0
 
           viable_values = []
-          (1..9).to_a.each do |value|
+          (1..9).each do |value|
             next if conflict?(line, column, value)
 
             viable_values << value

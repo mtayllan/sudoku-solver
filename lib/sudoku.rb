@@ -8,7 +8,6 @@ module Sudoku
   OPTIMIZED = '2'
 
   def self.run(algorithm, input_file_path, output_file_path)
-    p input_file_path
     grid = []
     File.foreach(input_file_path) do |line|
       grid << line.chomp.split(' ').map(&:to_i)
@@ -16,12 +15,11 @@ module Sudoku
 
     solution = []
 
-    case algorithm
-    when SIMPLE
+    if algorithm == SIMPLE
       sudoku = Sudoku::Simple.new(grid)
       sudoku.solve(0, 0)
       solution = sudoku.simple_grid
-    when OPTIMIZED
+    elsif algorithm == OPTIMIZED
       sudoku = Sudoku::Optimized.new(grid)
       sudoku.solve(0, 0)
       solution = sudoku.simple_grid

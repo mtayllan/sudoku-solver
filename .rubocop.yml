@@ -6,3 +6,6 @@ Metrics/MethodLength:
 
 Style/Documentation:
   Enabled: false
+
+Style/CaseLikeIf:
+  Enabled: false

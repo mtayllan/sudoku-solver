@@ -10,7 +10,7 @@ module Sudoku
       line, column = next_empty_cell(line, column)
       return true if line.nil?
 
-      (1..9).to_a.each do |value|
+      (1..9).each do |value|
         next if conflict?(line, column, value)
 
         @grid[line][column] = value
@@ -20,17 +20,6 @@ module Sudoku
       end
 
       false
-    end
-
-    def output_grid
-      9.times do |line|
-        9.times do |column|
-          print " #{@grid[line][column]}"
-          print ' |' if column % 3 == 2
-        end
-        print "\n"
-        puts '-' * 25 if line % 3 == 2
-      end
     end
 
     def simple_grid
