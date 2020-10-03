@@ -17,14 +17,18 @@ module Sudoku
 
     if algorithm == SIMPLE
       sudoku = Sudoku::Simple.new(grid)
-      sudoku.solve(0, 0)
-      solution = sudoku.simple_grid
+      solved = sudoku.solve(0, 0)
+      solution = sudoku.simple_grid if solved
     elsif algorithm == OPTIMIZED
       sudoku = Sudoku::Optimized.new(grid)
-      sudoku.solve(0, 0)
-      solution = sudoku.simple_grid
+      solved = sudoku.solve(0, 0)
+      solution = sudoku.simple_grid if solved
     else
       raise 'Invalid algorithm option'
+    end
+
+    if !solved
+      raise 'Can not solve this sudoku'
     end
 
     File.write(output_file_path, solution)

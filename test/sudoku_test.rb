@@ -7,7 +7,7 @@ require_relative '../lib/sudoku'
 class SudokuTest < Minitest::Test
   def test_simple
     Dir.foreach("#{__dir__}/problems") do |filename|
-      next if ['.', '..'].include?(filename)
+      next if ['.', '..', 'fail.txt'].include?(filename)
 
       problem_path = "#{__dir__}/problems/#{filename}"
       solution_path = "#{__dir__}/tmp_solution.txt"
@@ -23,7 +23,7 @@ class SudokuTest < Minitest::Test
 
   def test_optimized
     Dir.foreach("#{__dir__}/problems") do |filename|
-      next if ['.', '..'].include?(filename)
+      next if ['.', '..', 'fail.txt'].include?(filename)
 
       problem_path = "#{__dir__}/problems/#{filename}"
       solution_path = "#{__dir__}/tmp_solution.txt"
@@ -35,6 +35,13 @@ class SudokuTest < Minitest::Test
 
       assert_equal expected_solution, calculated_solution
     end
+  end
+
+  def test_fail
+    problem_path = "#{__dir__}/problems/fail.txt"
+    solution_path = "#{__dir__}/tmp_solution.txt"
+
+    assert_raises { Sudoku.run('1', problem_path, solution_path) }
   end
 
   Minitest.after_run do
