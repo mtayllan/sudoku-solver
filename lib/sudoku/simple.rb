@@ -23,7 +23,7 @@ module Sudoku
     end
 
     def simple_grid
-      @grid.map { |line| line.join(' ') }.join("\n")
+      @grid.map { |line| line.join(' ') }.join(" \n")
     end
 
     private
