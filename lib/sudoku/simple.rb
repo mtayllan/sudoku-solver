@@ -29,8 +29,8 @@ module Sudoku
     private
 
     def next_empty_cell(line, column)
-      loop do
-        loop do
+      while true
+        while true
           return [line, column] if @grid[line][column].zero?
 
           column += 1

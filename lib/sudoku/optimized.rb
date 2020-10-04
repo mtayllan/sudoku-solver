@@ -31,20 +31,14 @@ module Sudoku
         9.times do |column|
           next if @grid[line][column] != 0
 
-          viable_values = []
-          (1..9).each do |value|
-            next if conflict?(line, column, value)
-
-            viable_values << value
-          end
-          @grid[line][column] = viable_values
+          @grid[line][column] = (1..9).reject { |value| conflict?(line, column, value) }
         end
       end
     end
 
     def next_empty_cell(line, column)
-      loop do
-        loop do
+      while true
+        while true
           return [line, column] if @grid[line][column].is_a?(Array)
 
           column += 1

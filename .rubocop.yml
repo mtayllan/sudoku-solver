@@ -9,3 +9,6 @@ Style/Documentation:
 
 Style/CaseLikeIf:
   Enabled: false
+
+Style/InfiniteLoop:
+  Enabled: false
